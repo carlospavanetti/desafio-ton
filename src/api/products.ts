@@ -10,6 +10,7 @@ type ListResponse = {
 };
 
 async function list(): Promise<ListResponse> {
+  await new Promise((resolve) => setTimeout(resolve, 1500));
   return {
     products: [
       {
