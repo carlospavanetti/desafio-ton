@@ -5,6 +5,7 @@ import ProductListScreen from '@screens/ProductListScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import ShoppingCartScreen from '@screens/ShoppingCartScreen';
+import HeaderCart from '@features/shoppingCart/components/HeaderCart';
 
 const Stack = createStackNavigator();
 
@@ -14,9 +15,10 @@ export default function App(): JSX.Element {
       <StatusBar />
       <NavigationContainer>
         <Stack.Navigator
-          screenOptions={{
+          screenOptions={({ navigation }) => ({
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
+            headerRight: () => <HeaderCart navigation={navigation} />,
+          })}
         >
           <Stack.Screen
             name="Home"
