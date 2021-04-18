@@ -5,12 +5,15 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { ParamListBase } from '@react-navigation/routers';
 import { Colors } from '@utils/constants';
 
+import { useSelector } from 'react-redux';
+import { itemsSelector } from '../shoppingCartSlice';
+
 type Props = {
   navigation: StackNavigationProp<ParamListBase>;
 };
 
 export default function HeaderCart({ navigation }: Props): JSX.Element {
-  const itemsCount = 10;
+  const itemsCount = useSelector(itemsSelector).length;
   const emptyCart = itemsCount === 0;
 
   return (

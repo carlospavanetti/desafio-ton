@@ -1,17 +1,24 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Product } from '@api/products';
 import { Colors, Shadows } from '@utils/constants';
+import {
+  addItem,
+  itemsSelector as cartItemsSelector,
+  removeItem,
+} from '@features/shoppingCart/shoppingCartSlice';
 
 type Props = { product: Product };
 
 export default function ProductView({ product }: Props): JSX.Element {
-  const shoppingCart = [{ id: 1 }];
-  const isInCart: boolean = shoppingCart.some((item: Partial<Product>) => item.id === product.id);
+  const dispatch = useDispatch();
+  const shoppingCart = useSelector(cartItemsSelector);
+  const isInCart: boolean = shoppingCart.some((item: Product) => item.id === product.id);
 
-  const [buttonColorStyle, textAction] = isInCart
-    ? [styles.redButton, 'Remover']
-    : [styles.greenButton, 'Adicionar'];
+  const [buttonColorStyle, textAction, action] = isInCart
+    ? [styles.redButton, 'Remover', () => removeItem(product.id)]
+    : [styles.greenButton, 'Adicionar', () => addItem(product)];
 
   return (
     <View style={styles.container}>
@@ -20,7 +27,11 @@ export default function ProductView({ product }: Props): JSX.Element {
         <Text style={styles.name}>{product.name}</Text>
         <Text style={styles.description}>{product.description}</Text>
       </View>
-      <TouchableHighlight underlayColor="white" accessibilityRole="button">
+      <TouchableHighlight
+        onPress={() => dispatch(action())}
+        underlayColor="white"
+        accessibilityRole="button"
+      >
         <View style={[styles.button, buttonColorStyle]}>
           <Text style={styles.buttonText}>{textAction}</Text>
         </View>

@@ -4,22 +4,11 @@ import { FlatList } from 'react-native-gesture-handler';
 import { AntDesign } from '@expo/vector-icons';
 import { Product } from '@api/products';
 import { Colors, Shadows } from '@utils/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { itemsSelector, removeItem } from '../shoppingCartSlice';
 
 export default function ShoppingCartList(): JSX.Element {
-  const shoppingCart = [
-    {
-      id: 1,
-      name: 'Gato fofinho',
-      description: 'Uma besta que não passa de um besta',
-      image: 'https://i.pinimg.com/474x/6b/86/74/6b867435a30b4a0014ac476733bc79f4.jpg',
-    },
-    {
-      id: 2,
-      name: 'Gato sedutor',
-      description: 'Nem sexy, nem vulgar',
-      image: 'https://i.pinimg.com/474x/60/fb/53/60fb5367c092e79e58eddab67d25ccb3.jpg',
-    },
-  ];
+  const shoppingCart = useSelector(itemsSelector);
   const productsCount = shoppingCart.length;
   const headerText = productsCount === 1 ? 'produto adicionado' : 'produtos adicionados';
 
@@ -39,6 +28,8 @@ export default function ShoppingCartList(): JSX.Element {
 }
 
 function CartItem({ product }: { product: Product }) {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.block}>
       <Image style={styles.image} source={{ uri: product.image }} />
@@ -46,7 +37,7 @@ function CartItem({ product }: { product: Product }) {
         <Text style={styles.name}>{product.name}</Text>
         <Text style={styles.description}>{product.description}</Text>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => dispatch(removeItem(product.id))}>
         <AntDesign name="close" style={styles.close} />
       </TouchableOpacity>
     </View>
