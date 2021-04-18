@@ -11,6 +11,7 @@ module.exports = function (api) {
             '@features': './src/features',
             '@screens': './src/screens',
             '@utils': './src/utils',
+            '@store': './src/store',
           },
         },
       ],

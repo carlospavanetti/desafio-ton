@@ -1,27 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import ProductView from './ProductView';
 import { Colors } from '@utils/constants';
 import withMissingElements from '@utils/withMissingElements';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@store';
+import { loadProducts } from '../productsSlice';
 
 export default function ProductsList(): JSX.Element {
-  const products = [
-    {
-      id: 1,
-      name: 'Gato fofinho',
-      description: 'Uma besta que não passa de um besta',
-      image: 'https://i.pinimg.com/474x/6b/86/74/6b867435a30b4a0014ac476733bc79f4.jpg',
-    },
-    {
-      id: 2,
-      name: 'Gato sedutor',
-      description: 'Nem sexy, nem vulgar',
-      image: 'https://i.pinimg.com/474x/60/fb/53/60fb5367c092e79e58eddab67d25ccb3.jpg',
-    },
-  ];
+  const dispatch = useDispatch();
+  const products = useSelector((state: RootState) => state.products.values);
+  const isLoading = useSelector((state: RootState) => state.products.loading);
 
-  const isLoading = false;
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, []);
 
   if (isLoading) return <Text>Loading...</Text>;
 
@@ -33,6 +27,8 @@ export default function ProductsList(): JSX.Element {
       keyExtractor={(item) => item.value.id.toString()}
       numColumns={numColumns}
       style={styles.listContainer}
+      onRefresh={() => dispatch(loadProducts())}
+      refreshing={isLoading}
       renderItem={({ item }) =>
         item.empty ? <EmptyBox /> : <ProductView product={item.value} key={item.value.id} />
       }
