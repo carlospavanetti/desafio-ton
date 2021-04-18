@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { AntDesign } from '@expo/vector-icons';
 import { Product } from '@api/products';
+import { Colors, Shadows } from '@utils/constants';
 
 export default function ShoppingCartList(): JSX.Element {
   const shoppingCart = [
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   listContainer: {
-    backgroundColor: '#f5f6fa',
+    backgroundColor: Colors.BACKGROUND_COLOR,
   },
   block: {
     alignItems: 'center',
@@ -74,14 +75,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     marginVertical: 8,
 
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    ...Shadows.DEFAULT_BOX_SHADOW,
   },
   image: {
     aspectRatio: 1,
@@ -99,10 +93,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   description: {
-    color: '#717579',
+    color: Colors.DARK_GRAY,
   },
   close: {
-    color: '#d91d50',
+    color: Colors.RED,
     fontSize: 32,
     padding: 20,
   },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { Product } from '@api/products';
+import { Colors, Shadows } from '@utils/constants';
 
 type Props = { product: Product };
 
@@ -37,27 +38,20 @@ const styles = StyleSheet.create({
     margin: 8,
     padding: 16,
 
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    ...Shadows.DEFAULT_BOX_SHADOW,
   },
   image: {
     borderRadius: 8,
     aspectRatio: 1,
   },
   name: {
-    color: 'black',
+    color: Colors.STRONG_TEXT,
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 8,
   },
   description: {
-    color: '#717579',
+    color: Colors.DARK_GRAY,
   },
   button: {
     borderRadius: 8,
@@ -65,10 +59,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   redButton: {
-    backgroundColor: '#d91d50',
+    backgroundColor: Colors.RED,
   },
   greenButton: {
-    backgroundColor: '#1cb44b',
+    backgroundColor: Colors.GREEN,
   },
   buttonText: {
     color: 'white',

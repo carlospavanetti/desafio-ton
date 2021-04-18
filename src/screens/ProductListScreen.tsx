@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import ProductsList from '@features/products/components/ProductsList';
+import { Colors } from '@utils/constants';
 
 export default function ProductListScreen(): JSX.Element {
   return (
@@ -12,7 +13,7 @@ export default function ProductListScreen(): JSX.Element {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#f5f6fa',
+    backgroundColor: Colors.BACKGROUND_COLOR,
     flex: 1,
   },
 });

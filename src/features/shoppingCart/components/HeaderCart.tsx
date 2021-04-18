@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { ParamListBase } from '@react-navigation/routers';
+import { Colors } from '@utils/constants';
 
 type Props = {
   navigation: StackNavigationProp<ParamListBase>;
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   botton: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#d91d50',
+    backgroundColor: Colors.RED,
     borderRadius: 10,
     color: 'white',
     flexGrow: 1,

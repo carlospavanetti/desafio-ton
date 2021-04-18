@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import ProductView from './ProductView';
+import { Colors } from '@utils/constants';
 import withMissingElements from '@utils/withMissingElements';
 
 export default function ProductsList(): JSX.Element {
@@ -45,7 +46,7 @@ function EmptyBox() {
 
 const styles = StyleSheet.create({
   listContainer: {
-    backgroundColor: '#f5f6fa',
+    backgroundColor: Colors.BACKGROUND_COLOR,
     padding: 8,
   },
   emptyItem: {
