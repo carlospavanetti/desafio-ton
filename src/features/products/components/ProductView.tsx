@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import { Product } from '../../../api/products';
+import { Product } from '@api/products';
 
 type Props = { product: Product };
 

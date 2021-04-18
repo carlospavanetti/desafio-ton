@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import ProductView from './ProductView';
-import withMissingElements from '../../../utils/withMissingElements';
+import withMissingElements from '@utils/withMissingElements';
 
 export default function ProductsList(): JSX.Element {
   const products = [
