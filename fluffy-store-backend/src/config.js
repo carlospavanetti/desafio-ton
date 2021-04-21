@@ -5,6 +5,12 @@ const Config = {
     Products: process.env.PRODUCTS_TABLE_NAME,
     Users: process.env.USERS_TABLE_NAME,
   },
+  Buckets: {
+    Images: process.env.IMAGES_BUCKET_NAME,
+    SignedUrls: {
+      ExpirationSeconds: 600,
+    },
+  },
   Products: {
     DefaultLimit: 8,
   },
@@ -19,6 +25,12 @@ const ConfigSchema = Joi.object({
   Tables: Joi.object({
     Products: Joi.string().required(),
     Users: Joi.string().required(),
+  }),
+  Buckets: Joi.object({
+    Images: Joi.string().required(),
+    SignedUrls: Joi.object({
+      ExpirationSeconds: Joi.number().positive().required(),
+    }),
   }),
   Products: Joi.object({
     DefaultLimit: Joi.number().min(1).required(),

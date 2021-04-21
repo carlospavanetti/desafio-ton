@@ -13,6 +13,7 @@ provider:
   environment:
     PRODUCTS_TABLE_NAME: Products
     USERS_TABLE_NAME: Users
+    IMAGES_BUCKET_NAME: fluffy-store
     JWT_KEY: TON_FLUFFY_STORE_TON
   iamRoleStatements:
     - Effect: Allow
@@ -24,6 +25,10 @@ provider:
       Action:
         - dynamodb:GetItem
       Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.USERS_TABLE_NAME}"
+    - Effect: Allow
+      Action:
+        - s3:putObjectAcl
+      Resource: "arn:aws:s3:::${self:provider.environment.IMAGES_BUCKET_NAME}/"
 
 functions:
   authorization:
@@ -35,6 +40,15 @@ functions:
       - http:
           method: post
           path: admin/sign_in
+          cors: true
+
+  admin-create-upload-url:
+    handler: src/api/admin/images.upload
+    events:
+      - http:
+          method: post
+          path: admin/images/url
+          authorizer: authorization
           cors: true
 
   admin-create-product:
@@ -81,3 +95,16 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+    ImagesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+        BucketName: ${self:provider.environment.IMAGES_BUCKET_NAME}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+              AllowedOrigins:
+                - "*"
