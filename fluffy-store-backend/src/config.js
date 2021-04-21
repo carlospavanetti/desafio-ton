@@ -14,6 +14,10 @@ const Config = {
   Products: {
     DefaultLimit: 8,
   },
+  Accesses: {
+    Key: process.env.COUNT_API_KEY,
+    Namespace: process.env.COUNT_API_NAMESPACE,
+  },
   Jwt: {
     Key: process.env.JWT_KEY,
     Algorithm: 'HS256',
@@ -34,6 +38,10 @@ const ConfigSchema = Joi.object({
   }),
   Products: Joi.object({
     DefaultLimit: Joi.number().min(1).required(),
+  }),
+  Accesses: Joi.object({
+    Key: Joi.string().required(),
+    Namespace: Joi.string().required(),
   }),
   Jwt: {
     Key: Joi.string().required(),

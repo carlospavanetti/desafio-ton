@@ -15,6 +15,8 @@ provider:
     USERS_TABLE_NAME: Users
     IMAGES_BUCKET_NAME: fluffy-store
     JWT_KEY: TON_FLUFFY_STORE_TON
+    COUNT_API_KEY: count
+    COUNT_API_NAMESPACE: fluffy-store
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -42,6 +44,15 @@ functions:
           path: admin/sign_in
           cors: true
 
+  admin-count-accesses:
+    handler: src/api/admin/accesses.count
+    events:
+      - http:
+          method: get
+          path: admin/accesses
+          authorizer: authorization
+          cors: true
+
   admin-create-upload-url:
     handler: src/api/admin/images.upload
     events:
@@ -66,6 +77,13 @@ functions:
       - http:
           method: get
           path: products
+
+  hit-accesses:
+    handler: src/api/accesses.hit
+    events:
+      - http:
+          method: get
+          path: accesses/hit
 
 resources:
   Resources:
