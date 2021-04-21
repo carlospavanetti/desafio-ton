@@ -1,10 +1,12 @@
 const { DynamoDB } = require('aws-sdk');
 const dynamoClient = new DynamoDB.DocumentClient();
 
+const TableName = process.env.PRODUCTS_TABLE_NAME;
+
 const ProductRepository = {
   async list({ after, limit }) {
     const params = {
-      TableName: process.env.PRODUCTS_TABLE_NAME,
+      TableName,
       FilterExpression: 'active = :active',
       ExpressionAttributeValues: { ':active': true },
       Limit: limit,
@@ -14,6 +16,15 @@ const ProductRepository = {
     const result = await dynamoClient.scan(params).promise();
     const { Items, LastEvaluatedKey } = result;
     return { products: Items, lastKey: LastEvaluatedKey };
+  },
+
+  put(obj) {
+    return dynamoClient
+      .put({
+        TableName,
+        Item: { ...obj, createdAt: new Date().toISOString() },
+      })
+      .promise();
   },
 };
 

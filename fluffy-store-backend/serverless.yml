@@ -15,10 +15,19 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
+        - dynamodb:PutItem
         - dynamodb:Scan
       Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.PRODUCTS_TABLE_NAME}"
 
 functions:
+  admin-create-product:
+    handler: src/api/admin/products.create
+    events:
+      - http:
+          method: post
+          path: admin/products
+          cors: true
+
   list-products:
     handler: src/api/products.list
     events:
