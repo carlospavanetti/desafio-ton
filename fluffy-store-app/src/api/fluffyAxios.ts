@@ -1,7 +1,8 @@
 import Axios from 'axios';
+import Constants from 'expo-constants';
 
 const FluffyAxios = Axios.create({
-  baseURL: 'https://rw32403vl3.execute-api.us-east-1.amazonaws.com/dev',
+  baseURL: Constants.manifest.configurations.backendURL,
 });
 
 export default FluffyAxios;

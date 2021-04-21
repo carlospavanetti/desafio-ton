@@ -1,5 +1,7 @@
+import FluffyAxios from './fluffyAxios';
+
 async function hit(): Promise<void> {
-  // GET accesses/hit
+  return FluffyAxios.get('/accesses/hit');
 }
 
 export default { hit };
