@@ -12,20 +12,38 @@ provider:
   region: us-east-1
   environment:
     PRODUCTS_TABLE_NAME: Products
+    USERS_TABLE_NAME: Users
+    JWT_KEY: TON_FLUFFY_STORE_TON
   iamRoleStatements:
     - Effect: Allow
       Action:
         - dynamodb:PutItem
         - dynamodb:Scan
       Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.PRODUCTS_TABLE_NAME}"
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.USERS_TABLE_NAME}"
 
 functions:
+  authorization:
+    handler: src/api/auth.authorize
+
+  authentication:
+    handler: src/api/auth.authenticate
+    events:
+      - http:
+          method: post
+          path: admin/sign_in
+          cors: true
+
   admin-create-product:
     handler: src/api/admin/products.create
     events:
       - http:
           method: post
           path: admin/products
+          authorizer: authorization
           cors: true
 
   list-products:
@@ -46,6 +64,19 @@ resources:
             AttributeType: S
         KeySchema:
           - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.USERS_TABLE_NAME}
+        AttributeDefinitions:
+          - AttributeName: name
+            AttributeType: S
+        KeySchema:
+          - AttributeName: name
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1

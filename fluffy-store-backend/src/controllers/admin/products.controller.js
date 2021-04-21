@@ -1,6 +1,6 @@
 const CreateProduct = require('../../core/products/CreateProduct');
 const HttpResponse = require('../../lib/HttpResponse');
-const repository = require('../../core/products/ProductsRepository');
+const repository = require('../../core/products/products.repository');
 
 const AdminProductsController = {
   async create({ body }) {

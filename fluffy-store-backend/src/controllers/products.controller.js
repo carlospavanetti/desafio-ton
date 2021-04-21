@@ -1,6 +1,6 @@
 const HttpResponse = require('../lib/HttpResponse');
 const ListProducts = require('../core/products/ListProducts');
-const repository = require('../core/products/ProductsRepository');
+const repository = require('../core/products/products.repository');
 
 const ProductsController = {
   async list({ query }) {
