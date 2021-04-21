@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const Result = require('folktale/result');
+const Config = require('../../config');
 
 class ProductsPagination {
   static from(queryString) {
@@ -23,7 +24,7 @@ class ProductsPagination {
 
 const schema = Joi.object({
   after: Joi.string().uuid({ version: 'uuidv4' }).allow(''),
-  limit: Joi.number().integer().positive().default(8),
+  limit: Joi.number().integer().positive().default(Config.Products.DefaultLimit),
 });
 
 module.exports = ProductsPagination;

@@ -1,7 +1,8 @@
+const Config = require('../../config');
 const { DynamoDB } = require('aws-sdk');
 const dynamoClient = new DynamoDB.DocumentClient();
 
-const TableName = process.env.PRODUCTS_TABLE_NAME;
+const TableName = Config.Tables.Products;
 
 const ProductRepository = {
   async list({ after, limit }) {
