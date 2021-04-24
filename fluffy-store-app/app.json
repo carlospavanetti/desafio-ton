@@ -26,8 +26,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "configurations": {
+    "extra": {
       "backendURL": "https://rw32403vl3.execute-api.us-east-1.amazonaws.com/dev"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/carlospavanetti/desafio-ton"
   }
 }

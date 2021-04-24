@@ -1,8 +1,7 @@
 import Axios from 'axios';
 import Constants from 'expo-constants';
 
-const FluffyAxios = Axios.create({
-  baseURL: Constants.manifest.configurations.backendURL,
-});
+const baseURL = (Constants.manifest.extra || {}).backendURL;
+const FluffyAxios = Axios.create({ baseURL });
 
 export default FluffyAxios;
