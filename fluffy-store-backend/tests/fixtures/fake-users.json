@@ -1,0 +1,7 @@
+[
+  {
+    "name": "carlos",
+    "passwordHash": "$2b$10$CVLG9Bg.A6BVNwjWy6W5R.7HkodCzhs1A3Uci/UcpGWBuhWFYI3DC",
+    "scopes": ["images:upload", "accesses:count", "products:create", "products:list"]
+  }
+]

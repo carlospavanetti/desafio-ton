@@ -1,6 +1,5 @@
 const Result = require('folktale/result');
-const { DynamoDB } = require('aws-sdk');
-const dynamoClient = new DynamoDB.DocumentClient();
+const DynamoClient = require('../../lib/DynamoClient');
 const Config = require('../../config');
 
 const Repository = {
@@ -10,7 +9,7 @@ const Repository = {
       Key: { name: username },
     };
     try {
-      const { Item } = await dynamoClient.get(params).promise();
+      const { Item } = await DynamoClient.get(params).promise();
       return Result.Ok(Item);
     } catch (err) {
       return Result.Error(err);

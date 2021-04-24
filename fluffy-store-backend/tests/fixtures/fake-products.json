@@ -1,0 +1,30 @@
+[
+  {
+    "id": "272fb1ee-1e87-4565-9798-bada21f5c5a6",
+    "quantity": 10,
+    "active": true,
+    "image": "https://fluffy-store.s3.amazonaws.com/5.jpg",
+    "createdAt": "2021-04-23T20:04:10.343Z",
+    "price": 5,
+    "description": "Branco, preto e vermelho, se sente ameaçado",
+    "name": "Panda"
+  },
+  {
+    "id": "b23050a2-d3f0-4028-9be7-06d9b151b6fe",
+    "active": true,
+    "image": "https://fluffy-store.s3.amazonaws.com/1.jpg",
+    "createdAt": "2021-04-23T20:04:10.343Z",
+    "description": "Água e ração fresquinhas, JÁ!",
+    "price": 10,
+    "name": "Lady Cat"
+  },
+  {
+    "id": "7507dfb0-405c-4826-912a-efa91b102309",
+    "active": true,
+    "image": "https://fluffy-store.s3.amazonaws.com/3.jpg",
+    "createdAt": "2021-04-23T20:04:10.343Z",
+    "description": "Can I hear an amen?",
+    "price": 4,
+    "name": "Rev. Johnson"
+  }
+]

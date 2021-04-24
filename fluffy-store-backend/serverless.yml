@@ -3,7 +3,25 @@ service: fluffy-store-backend
 frameworkVersion: "2"
 
 plugins:
+  - serverless-jest-plugin
+  - serverless-dynamodb-local
   - serverless-offline
+
+custom:
+  dynamodb:
+    stages:
+      - dev
+      - test
+    start:
+      inMemory: true
+      migrate: true
+    seed:
+      test:
+        sources:
+          - table: ${self:provider.environment.USERS_TABLE_NAME}
+            sources: [./tests/fixtures/fake-users.json]
+          - table: ${self:provider.environment.PRODUCTS_TABLE_NAME}
+            sources: [./tests/fixtures/fake-products.json]
 
 provider:
   name: aws

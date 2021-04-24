@@ -1,6 +1,5 @@
 const Config = require('../../config');
-const { DynamoDB } = require('aws-sdk');
-const dynamoClient = new DynamoDB.DocumentClient();
+const DynamoClient = require('../../lib/DynamoClient');
 
 const TableName = Config.Tables.Products;
 
@@ -14,18 +13,16 @@ const ProductRepository = {
     };
     if (after) params.ExclusiveStartKey = { id: after };
 
-    const result = await dynamoClient.scan(params).promise();
+    const result = await DynamoClient.scan(params).promise();
     const { Items, LastEvaluatedKey } = result;
     return { products: Items, lastKey: LastEvaluatedKey };
   },
 
   put(obj) {
-    return dynamoClient
-      .put({
-        TableName,
-        Item: { ...obj, createdAt: new Date().toISOString() },
-      })
-      .promise();
+    return DynamoClient.put({
+      TableName,
+      Item: { ...obj, createdAt: new Date().toISOString() },
+    }).promise();
   },
 };
 
