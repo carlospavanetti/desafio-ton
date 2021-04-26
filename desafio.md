@@ -29,7 +29,7 @@ Você foi escolhido para fazer um app de venda de produtos para o Ton. Nós vend
 
 > Para o app reproduza o wireframe abaixo e utilize typescript. Não precisa se preocupar com a UI, não estamos avaliando isso no momento - mas vamos avaliar a UX. A lista de produtos deve ser carregada de um servidor - de preferência de um site/API público.
 
-![Protótipo com duas telas de um aplicativo de loja virtual][prototipo.png]
+![Protótipo com duas telas de um aplicativo de loja virtual](prototipo.png)
 
 ## BÔNUS:
 
